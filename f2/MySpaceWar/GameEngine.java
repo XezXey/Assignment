@@ -39,7 +39,6 @@ public class GameEngine implements GameReporter {
 
         gp.updateGameUI(this);
         //Rectangle2D.Double vr = ship.getRectangle();
-        //Rectangle2D.Double er;
     }
 }
 
