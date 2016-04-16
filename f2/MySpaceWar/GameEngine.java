@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.Timer;
 
-public class GameEngine implements GameReporter {
+public class GameEngine implements GameReporter,KeyListener {
     GamePanel gp;
 
     private SpaceShip ship;
@@ -25,7 +25,7 @@ public class GameEngine implements GameReporter {
             }
         });
         timer.setRepeats(true);
-        }
+    }
     public void start(){
         timer.start();
     }
@@ -38,8 +38,40 @@ public class GameEngine implements GameReporter {
 
 
         gp.updateGameUI(this);
-        //Rectangle2D.Double vr = ship.getRectangle();
+        Rectangle2D.Double vr = ship.getRectangle();
+        Rectangle2D.Double er;
+        }
+
+    void controlVehicle(KeyEvent e){
+        switch(e.getKeyCode()){
+        case KeyEvent.VK_LEFT:
+            ship.move(-1);
+            break;
+        case KeyEvent.VK_RIGHT:
+            ship.move(1);
+            break;
+        /*case KeyEvent.VK_UP:
+            v.move();
+            break;
+        case KeyEvent.VK_DOWN:
+            v.move();
+            break;
+        */
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e){
+        controlVehicle(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e){
+        //Nothing
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e){
+        //Nothing
     }
 }
-
-

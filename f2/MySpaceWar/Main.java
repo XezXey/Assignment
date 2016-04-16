@@ -15,6 +15,7 @@ public class Main {
         GamePanel gp = new GamePanel();
         GameEngine engine = new GameEngine(gp, ship);
         space.getContentPane().add(gp, BorderLayout.CENTER);
+        space.addKeyListener(engine);
         engine.start();
         space.setVisible(true);
 

@@ -25,7 +25,7 @@ public class GamePanel extends JPanel{
             s.draw(big);
         }
     
-    //repaint();
+    repaint();
     }
     
     @Override
