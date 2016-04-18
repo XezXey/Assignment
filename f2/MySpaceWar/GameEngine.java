@@ -9,9 +9,11 @@ import javax.swing.Timer;
 public class GameEngine implements GameReporter,KeyListener {
     GamePanel gp;
 
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private SpaceShip ship;
     private long score = 0;
     private Timer timer;
+    private double difficulty = 0.01;
 
     public GameEngine(GamePanel gp, SpaceShip ship) {
         this.gp = gp;
@@ -30,16 +32,39 @@ public class GameEngine implements GameReporter,KeyListener {
         timer.start();
     }
 
+
+    public void generateEnemy(){
+        Enemy e = new Enemy(195,30);
+        gp.sprites.add(e);
+        enemies.add(e);
+    }
     public long getScore(){
         return score;
     }
 
     private void process(){
 
-
+        if(Math.random()/10 < difficulty){
+            generateEnemy();
+        }
+        Iterator<Enemy> e_iter = enemies.iterator();
+        while(e_iter.hasNext()){
+            Enemy e = e_iter.next();
+            e.proceed();
+            if(!e.isAlive()){
+                e_iter.remove();
+                gp.sprites.remove(e);
+                score += 100;
+            }
+        }
+        
         gp.updateGameUI(this);
         Rectangle2D.Double vr = ship.getRectangle();
         Rectangle2D.Double er;
+
+        for(Enemy e : enemies){
+            er = e.getRectangle();
+        }
         }
 
     void controlVehicle(KeyEvent e){
