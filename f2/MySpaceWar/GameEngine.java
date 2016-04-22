@@ -1,10 +1,12 @@
 package f2.MySpaceWar;
 
+import javax.swing.JButton;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.Timer;
+import java.awt.*;
 
 public class GameEngine implements GameReporter,KeyListener {
     GamePanel gp;
@@ -13,13 +15,25 @@ public class GameEngine implements GameReporter,KeyListener {
     private SpaceShip ship;
     private long score = 0;
     private Timer timer;
-    private double difficulty = 0.01;
+    private int x;
+    private double difficulty = 0.03;
 
     public GameEngine(GamePanel gp, SpaceShip ship) {
         this.gp = gp;
         this.ship = ship;
         gp.sprites.add(ship);
 
+        /*GridLayout layout = new GridLayout(2,1);
+        JButton hard = new JButton("hard");
+        gp.setLayout(layout);
+        hard.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty += 0.01;
+                System.out.println("Difficulty : " + difficulty);
+            }
+        });
+        gp.add(hard, BorderLayout.PAGE_END);
+        */
         timer = new Timer(50, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0){
@@ -57,7 +71,7 @@ public class GameEngine implements GameReporter,KeyListener {
                 score += 100;
             }
         }
-        
+
         gp.updateGameUI(this);
         Rectangle2D.Double vr = ship.getRectangle();
         Rectangle2D.Double er;
@@ -74,6 +88,26 @@ public class GameEngine implements GameReporter,KeyListener {
             break;
         case KeyEvent.VK_RIGHT:
             ship.move(1);
+            break;
+        case KeyEvent.VK_H:
+            if(difficulty <= 0.1 ){
+                difficulty += 0.01;
+                System.out.println("Difficulty : " + difficulty);
+            }
+            /*while(ee_iter.hasNext()){
+                    Enemy ee = ee_iter.next();
+                    ee.harder();
+            }*/
+            break;
+        case KeyEvent.VK_L:
+            if(difficulty >= 0.02 ){
+                difficulty -= 0.01;
+                System.out.println("Difficulty : " + difficulty);
+            }
+            /*while(ee_iter.hasNext()){
+                Enemy ee = ee_iter.next();
+                ee.easier();
+            }*/
             break;
         /*case KeyEvent.VK_UP:
             v.move();
