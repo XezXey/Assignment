@@ -52,9 +52,6 @@ public class GameEngine implements GameReporter,KeyListener {
         gp.sprites.add(e);
         enemies.add(e);
     }
-    public long getScore(){
-        return score;
-    }
 
     private void process(){
 
@@ -78,8 +75,17 @@ public class GameEngine implements GameReporter,KeyListener {
 
         for(Enemy e : enemies){
             er = e.getRectangle();
+            if(er.intersects(vr)){
+                die();
+                return;
+            }
         }
+    }
+
+    public void die(){
+            timer.stop();
         }
+
 
     void controlVehicle(KeyEvent e){
         switch(e.getKeyCode()){
@@ -117,6 +123,10 @@ public class GameEngine implements GameReporter,KeyListener {
             break;
         */
         }
+    }
+
+    public long getScore(){
+        return score;
     }
 
     @Override
