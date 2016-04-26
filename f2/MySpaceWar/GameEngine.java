@@ -16,7 +16,8 @@ public class GameEngine implements GameReporter,KeyListener {
     private long score = 0;
     private Timer timer;
     private int x;
-    private double difficulty = 0.03;
+    private double harderFactor = 500000;
+    private double difficulty = 0.01;
 
     public GameEngine(GamePanel gp, SpaceShip ship) {
         this.gp = gp;
@@ -66,6 +67,10 @@ public class GameEngine implements GameReporter,KeyListener {
                 e_iter.remove();
                 gp.sprites.remove(e);
                 score += 100;
+                if(((double)score/harderFactor) >= difficulty){
+                    difficulty+=0.005;
+                    System.out.println("Harder!!!(Diff is" + difficulty + ")" );
+        }
             }
         }
 
@@ -124,6 +129,7 @@ public class GameEngine implements GameReporter,KeyListener {
         */
         }
     }
+
 
     public long getScore(){
         return score;
