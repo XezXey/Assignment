@@ -95,10 +95,10 @@ public class GameEngine implements GameReporter,KeyListener {
     void controlVehicle(KeyEvent e){
         switch(e.getKeyCode()){
         case KeyEvent.VK_LEFT:
-            ship.move(-1);
+            ship.move(-1, 0);
             break;
         case KeyEvent.VK_RIGHT:
-            ship.move(1);
+            ship.move(1, 0);
             break;
         case KeyEvent.VK_H:
             if(difficulty <= 0.1 ){
@@ -120,13 +120,13 @@ public class GameEngine implements GameReporter,KeyListener {
                 ee.easier();
             }*/
             break;
-        /*case KeyEvent.VK_UP:
-            v.move();
+        case KeyEvent.VK_UP:
+            ship.move(0, -1);
             break;
         case KeyEvent.VK_DOWN:
-            v.move();
+            ship.move(0, 1);
             break;
-        */
+        
         }
     }
 
