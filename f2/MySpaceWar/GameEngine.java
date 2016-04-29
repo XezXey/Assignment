@@ -23,18 +23,6 @@ public class GameEngine implements GameReporter,KeyListener {
         this.gp = gp;
         this.ship = ship;
         gp.sprites.add(ship);
-
-        /*GridLayout layout = new GridLayout(2,1);
-        JButton hard = new JButton("hard");
-        gp.setLayout(layout);
-        hard.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                difficulty += 0.01;
-                System.out.println("Difficulty : " + difficulty);
-            }
-        });
-        gp.add(hard, BorderLayout.PAGE_END);
-        */
         timer = new Timer(50, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0){
@@ -105,20 +93,12 @@ public class GameEngine implements GameReporter,KeyListener {
                 difficulty += 0.01;
                 System.out.println("Difficulty : " + difficulty);
             }
-            /*while(ee_iter.hasNext()){
-                    Enemy ee = ee_iter.next();
-                    ee.harder();
-            }*/
             break;
         case KeyEvent.VK_L:
             if(difficulty >= 0.02 ){
                 difficulty -= 0.01;
                 System.out.println("Difficulty : " + difficulty);
             }
-            /*while(ee_iter.hasNext()){
-                Enemy ee = ee_iter.next();
-                ee.easier();
-            }*/
             break;
         case KeyEvent.VK_UP:
             ship.move(0, -1);
@@ -126,7 +106,6 @@ public class GameEngine implements GameReporter,KeyListener {
         case KeyEvent.VK_DOWN:
             ship.move(0, 1);
             break;
-        
         }
     }
 
