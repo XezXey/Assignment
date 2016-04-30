@@ -2,13 +2,16 @@ package f2.MySpaceWar;
 
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.Timer;
 import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-public class GameEngine implements GameReporter,KeyListener {
+public class GameEngine implements GameReporter,KeyListener{
     GamePanel gp;
 
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -18,6 +21,7 @@ public class GameEngine implements GameReporter,KeyListener {
     private int x;
     private double harderFactor = 500000;
     private double difficulty = 0.01;
+    private boolean checkDead = true;
 
     public GameEngine(GamePanel gp, SpaceShip ship) {
         this.gp = gp;
@@ -32,6 +36,7 @@ public class GameEngine implements GameReporter,KeyListener {
         timer.setRepeats(true);
     }
     public void start(){
+        //gp.add(new JLabel(Double.toString(score)));
         timer.start();
     }
 
@@ -76,9 +81,25 @@ public class GameEngine implements GameReporter,KeyListener {
     }
 
     public void die(){
+            //checkDead = true;
             timer.stop();
-        }
+            JOptionPane.showMessageDialog(gp,"High Score : " + score +"\nPress OK to NewGame");
+            try{
+                TimeUnit.SECONDS.sleep(3);
+            }catch(InterruptedException e){
+                System.out.println(e.getMessage());
+            }
+            score = 0;
 
+            Iterator<Enemy> e_iter = enemies.iterator();
+            while(e_iter.hasNext()){
+                Enemy e = e_iter.next();
+                    e_iter.remove();
+                    gp.sprites.remove(e);
+            }
+            timer.start();
+        
+        }
 
     void controlVehicle(KeyEvent e){
         switch(e.getKeyCode()){
